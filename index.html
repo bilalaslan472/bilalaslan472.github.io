@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bilal Aslan - Portfolio</title>
+  
+  <!-- Font Awesome ikonları için (daire menü ikonları) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     body {
       margin: 0;
@@ -13,21 +17,134 @@
       font-family: Arial, sans-serif;
       color: white;
     }
+
     #spider-canvas {
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
     }
+
     .content {
       position: relative;
       z-index: 1;
       text-align: center;
       padding: 150px 20px;
     }
+
     h1 { font-size: 3em; margin-bottom: 10px; }
-    p { font-size: 1.5em; }
+    h2 { font-size: 2.5em; margin: 60px 0 30px; }
+    p { font-size: 1.5em; margin: 10px 0; }
     a { color: #00bfff; text-decoration: none; }
     a:hover { text-decoration: underline; }
+
+    /* Projeler kartları */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .project-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 25px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(0, 191, 255, 0.3);
+    }
+
+    /* Daire Sosyal Menü */
+    .social-menu {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      z-index: 1000;
+    }
+
+    .social-menu .toggle {
+      width: 70px;
+      height: 70px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #333;
+      font-size: 2em;
+      cursor: pointer;
+      transition: all 0.5s;
+    }
+
+    .social-menu .toggle.active {
+      transform: rotate(360deg);
+      background: #333;
+      color: #fff;
+    }
+
+    .social-menu ul {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      list-style: none;
+      pointer-events: none;
+    }
+
+    .social-menu ul li {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(calc(360deg / 4 * var(--i))) translateX(0);
+      transition: 0.5s;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .social-menu.active ul li {
+      transform: rotate(calc(360deg / 4 * var(--i))) translateX(120px);
+      opacity: 1;
+      pointer-events: auto;
+      transition-delay: calc(0.1s * var(--i));
+    }
+
+    .social-menu ul li a {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(calc(-360deg / 4 * var(--i)));
+      width: 60px;
+      height: 60px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      font-size: 1.8em;
+      color: #333;
+      transition: 0.3s;
+    }
+
+    .social-menu ul li a:hover {
+      transform: translate(-50%, -50%) rotate(calc(-360deg / 4 * var(--i))) scale(1.2);
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .social-menu ul li:nth-child(1) a { background: #333; color: #fff; }
+    .social-menu ul li:nth-child(2) a { background: #1da1f2; color: #fff; }
+    .social-menu ul li:nth-child(3) a { background: #e4405f; color: #fff; }
+    .social-menu ul li:nth-child(4) a { background: #0077b5; color: #fff; }
   </style>
 </head>
 <body>
@@ -37,14 +154,61 @@
     <h1>Merhaba! Ben Bilal ASLAN</h1>
     <p>Atatürk Üniversitesi, Bilgisayar Mühendisliği</p>
     <p>2. sınıf öğrencisi | Python & C++ | GitHub projeleri yakında</p>
-    <p>
+  </div>
+
+  <!-- Projeler Bölümü -->
+  <div class="projects">
+    <h2>Projelerim</h2>
+
+    <div class="project-card">
+      <h3>WheelOfFate - Circular Linked List Game</h3>
+      <p>C++ ile yapılmış hybrid veri yapısı: Dairesel bağlı liste + stack + hash table ile dinamik spin ve rollback özelliği.</p>
       <a href="https://github.com/bilalaslan472/WheelOfFate_CircularLinkedListGame" target="_blank">
-        WheelOfFate Projeme Bak →
+        GitHub Repo →
       </a>
-    </p>
+    </div>
+
+    <!-- Yeni proje eklemek istersen buraya benzer kart kopyala -->
+    <!-- Örnek:
+    <div class="project-card">
+      <h3>Yeni Proje Adı</h3>
+      <p>Açıklama buraya...</p>
+      <a href="https://github.com/bilalaslan472/YENI-REPO" target="_blank">GitHub Repo →</a>
+    </div>
+    -->
+  </div>
+
+  <!-- Daire Sosyal Menü -->
+  <div class="social-menu">
+    <div class="toggle">
+      <i class="fas fa-share-alt"></i>
+    </div>
+    <ul>
+      <li style="--i:0;">
+        <a href="https://github.com/bilalaslan472" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      <li style="--i:1;">
+        <a href="https://x.com/lyrx04" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+      <li style="--i:2;">
+        <a href="https://instagram.com" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </li>
+      <li style="--i:3;">
+        <a href="https://linkedin.com/in/bilal-aslan" target="_blank">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    </ul>
   </div>
 
   <script>
+    // Spider Cursor Animasyonu
     const canvas = document.getElementById('spider-canvas');
     const ctx = canvas.getContext('2d');
 
@@ -110,7 +274,16 @@
       requestAnimationFrame(draw);
     }
 
-    draw();  // <- Bu satır önemli, animasyonu başlatır!
+    draw();
+
+    // Daire Menü Toggle
+    const socialToggle = document.querySelector('.social-menu .toggle');
+    const socialMenu = document.querySelector('.social-menu');
+
+    socialToggle.addEventListener('click', () => {
+      socialToggle.classList.toggle('active');
+      socialMenu.classList.toggle('active');
+    });
   </script>
 </body>
 </html>
